@@ -53,10 +53,10 @@ function PartForm({ addPart, editId, parts }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-2 p-4 bg-white shadow rounded"
+      className="space-y-3 p-3 sm:p-4 bg-white shadow rounded"
     >
       <select
-        className="border p-2 w-full"
+        className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
         value={form.category}
         onChange={(e) =>
           setForm({ ...form, category: e.target.value })
@@ -71,7 +71,7 @@ function PartForm({ addPart, editId, parts }) {
       </select>
 
       <input
-        className="border p-2 w-full"
+        className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
         placeholder="የእቃው አይነት"
         value={form.name}
         onChange={(e) =>
@@ -80,7 +80,7 @@ function PartForm({ addPart, editId, parts }) {
       />
 
       <input
-        className="border p-2 w-full"
+        className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
         type="number"
         placeholder="ብዛት"
         value={form.quantity}
@@ -90,16 +90,16 @@ function PartForm({ addPart, editId, parts }) {
       />
 
       <input
-        className="border p-2 w-full"
-        type="ዋጋ"
-        placeholder="Price"
+        className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
+        type="number"
+        placeholder="ዋጋ"
         value={form.price}
         onChange={(e) =>
           setForm({ ...form, price: e.target.value })
         }
       />
 
-      <button className="bg-green-600 text-white p-2 w-full">
+      <button className="bg-green-600 text-white p-2.5 sm:p-3 w-full rounded font-semibold text-sm sm:text-base active:scale-[0.99] transition-transform">
         {editId ? "Update Part" : "Save Part"}
       </button>
     </form>

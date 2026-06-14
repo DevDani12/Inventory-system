@@ -5,11 +5,14 @@ import { toEthiopian } from "../Data/ethiopianCalendar";
 const btnStyle = {
   background: "blue",
   color: "white",
-  padding: "8px 12px",
+  padding: "10px 14px",
   border: "none",
-  borderRadius: "4px",
+  borderRadius: "6px",
   cursor: "pointer",
-  fontSize: "14px",
+  fontSize: "13px",
+  fontWeight: "500",
+  flex: "1 0 auto",
+  minWidth: 0,
 };
 
 function download(url, name) {
@@ -197,18 +200,20 @@ tr:nth-child(even) td { background: #f5f5f5; }
 
   return (
     <div className="space-y-2">
-      <div className="flex gap-2 flex-wrap">
-        <button onClick={exportCSV} style={btnStyle}>Export CSV</button>
-        <button onClick={exportExcel} style={{ ...btnStyle, background: "#16a34a" }}>Export Excel</button>
-        <button onClick={exportJSON} style={{ ...btnStyle, background: "#9333ea" }}>Export JSON</button>
-        <button onClick={exportWord} style={{ ...btnStyle, background: "#2563eb" }}>Word Print</button>
+      <div className="flex gap-1.5 sm:gap-2 flex-wrap">
+        <button onClick={exportCSV} style={btnStyle} className="text-xs sm:text-sm">CSV</button>
+        <button onClick={exportExcel} style={{ ...btnStyle, background: "#16a34a" }} className="text-xs sm:text-sm">Excel</button>
+        <button onClick={exportJSON} style={{ ...btnStyle, background: "#9333ea" }} className="text-xs sm:text-sm">JSON</button>
+        <button onClick={exportWord} style={{ ...btnStyle, background: "#2563eb" }} className="text-xs sm:text-sm">Word</button>
         <label
-          style={{ ...btnStyle, background: "#64748b", display: "inline-block" }}
+          style={{ ...btnStyle, background: "#64748b", display: "inline-block", textAlign: "center" }}
+          className="text-xs sm:text-sm"
         >
           Import
           <input ref={fileRef} type="file" accept=".json,.csv,.xlsx" onChange={handleFile} style={{ display: "none" }} />
         </label>
       </div>
+      <p className="text-xs text-gray-400 text-center sm:text-left">Export / Import parts data</p>
     </div>
   );
 }

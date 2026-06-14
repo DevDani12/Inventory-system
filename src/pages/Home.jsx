@@ -36,7 +36,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
-      <main className="max-w-2xl mx-auto p-4 space-y-4">
+      <main className="max-w-2xl mx-auto px-3 sm:px-4 py-3 sm:py-4 space-y-3 sm:space-y-4">
         <DataIO parts={parts} onImport={importParts} />
         <PartForm addPart={addPart} editId={editId} parts={parts} />
         <PartList parts={parts} deletePart={deletePart} editPart={editPart} />
