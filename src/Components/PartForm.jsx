@@ -6,48 +6,29 @@ function PartForm({ addPart, editId, parts }) {
     category: "",
     name: "",
     quantity: "",
-    price: "",
+    sender: "",
   });
 
-  // LOAD DATA WHEN EDITING
   useEffect(() => {
     if (editId) {
       const item = parts.find((p) => p.id === editId);
-
       if (item) {
         setForm({
           category: item.category || "",
           name: item.name || "",
           quantity: item.quantity || "",
-          price: item.price || "",
+          sender: item.sender || "",
         });
       }
     } else {
-      // RESET WHEN NOT EDITING
-      setForm({
-        category: "",
-        name: "",
-        quantity: "",
-        price: "",
-      });
+      setForm({ category: "", name: "", quantity: "", sender: "" });
     }
   }, [editId, parts]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    addPart({
-      id: editId || Date.now(),
-      ...form,
-    });
-
-    // RESET AFTER SAVE
-    setForm({
-      category: "",
-      name: "",
-      quantity: "",
-      price: "",
-    });
+    addPart({ id: editId || Date.now(), ...form });
+    setForm({ category: "", name: "", quantity: "", sender: "" });
   };
 
   return (
@@ -91,11 +72,10 @@ function PartForm({ addPart, editId, parts }) {
 
       <input
         className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
-        type="number"
-        placeholder="ዋጋ"
-        value={form.price}
+        placeholder="የላኪው ስም"
+        value={form.sender}
         onChange={(e) =>
-          setForm({ ...form, price: e.target.value })
+          setForm({ ...form, sender: e.target.value })
         }
       />
 

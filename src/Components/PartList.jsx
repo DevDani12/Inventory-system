@@ -12,7 +12,7 @@ function PartList({ parts, deletePart, editPart }) {
           <div className="text-xs sm:text-sm text-gray-600 mt-1 space-y-0.5">
             <p>Category: {part.category}</p>
             <p>Qty: {part.quantity}</p>
-            <p>Price: {part.price}</p>
+            <p>Sender: {part.sender}</p>
           </div>
           <p className="text-xs text-gray-400 mt-1.5">
             {part.createdAt != null ? formatEthiopianWithTime(new Date(part.createdAt)) : ""}

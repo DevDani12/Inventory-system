@@ -47,7 +47,7 @@ function DataIO({ parts = [], onImport }) {
   const exportCSV = () => {
     if (parts.length === 0) return;
     const escape = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-    const headers = ["Category", "Name", "Quantity", "Price", "Date", "Time"];
+    const headers = ["Category", "Name", "Quantity", "Sender", "Date", "Time"];
     const rows = parts.map((p) => {
       let ds = "", ts = "";
       if (p.createdAt != null) {
@@ -55,7 +55,7 @@ function DataIO({ parts = [], onImport }) {
         ds = getDateStr(d);
         ts = getTimeStr(d);
       }
-      return [escape(p.category), escape(p.name), escape(p.quantity), escape(p.price), escape(ds), escape(ts)];
+      return [escape(p.category), escape(p.name), escape(p.quantity), escape(p.sender), escape(ds), escape(ts)];
     });
     const csv = ["\uFEFF" + headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
     download(URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8;" })), `spare_parts_${date}.csv`);
@@ -70,7 +70,7 @@ function DataIO({ parts = [], onImport }) {
         ds = getDateStr(d);
         ts = getTimeStr(d);
       }
-      return { Category: p.category, Name: p.name, Quantity: p.quantity, Price: p.price, Date: ds, Time: ts };
+      return { Category: p.category, Name: p.name, Quantity: p.quantity, Sender: p.sender, Date: ds, Time: ts };
     });
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
@@ -102,7 +102,7 @@ function DataIO({ parts = [], onImport }) {
         <td>${p.category ?? ""}</td>
         <td>${p.name ?? ""}</td>
         <td>${p.quantity ?? ""}</td>
-        <td>${p.price ?? ""}</td>
+        <td>${p.sender ?? ""}</td>
         <td>${ds}</td>
         <td>${ts}</td>
       </tr>`;
@@ -129,7 +129,7 @@ tr:nth-child(even) td { background: #f5f5f5; }
 <p class="date">Printed: ${nowStr}</p>
 <table>
 <thead><tr>
-<th>Category</th><th>Name</th><th>Quantity</th><th>Price</th><th>Date</th><th>Time</th>
+<th>Category</th><th>Name</th><th>Quantity</th><th>Sender</th><th>Date</th><th>Time</th>
 </tr></thead>
 <tbody>${rows}</tbody>
 </table>
@@ -162,7 +162,7 @@ tr:nth-child(even) td { background: #f5f5f5; }
               if (k === "category") row.category = vals[idx] ?? "";
               else if (k === "name") row.name = vals[idx] ?? "";
               else if (k === "quantity") row.quantity = vals[idx] ?? "";
-              else if (k === "price") row.price = vals[idx] ?? "";
+              else if (k === "sender" || k === "price") row.sender = vals[idx] ?? "";
             });
             if (row.name) {
               row.id = Date.now() + Math.random();
@@ -179,7 +179,7 @@ tr:nth-child(even) td { background: #f5f5f5; }
             category: String(r.Category ?? r.category ?? ""),
             name: String(r.Name ?? r.name ?? ""),
             quantity: String(r.Quantity ?? r.quantity ?? ""),
-            price: String(r.Price ?? r.price ?? ""),
+            sender: String(r.Sender ?? r.sender ?? r.Price ?? r.price ?? ""),
           })).filter((r) => r.name);
         }
 
