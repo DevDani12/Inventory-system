@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { categories } from "../Data/categories";
+import { categories, subCategories } from "../Data/categories";
 
 function PartForm({ addPart, editId, parts }) {
   const [form, setForm] = useState({
@@ -8,6 +8,8 @@ function PartForm({ addPart, editId, parts }) {
     quantity: "",
     sender: "",
   });
+
+  const itemTypes = form.category ? subCategories[form.category] || [] : [];
 
   useEffect(() => {
     if (editId) {
@@ -40,7 +42,7 @@ function PartForm({ addPart, editId, parts }) {
         className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
         value={form.category}
         onChange={(e) =>
-          setForm({ ...form, category: e.target.value })
+          setForm({ ...form, category: e.target.value, name: "" })
         }
       >
         <option value="">ምድብ ይምረጡ</option>
@@ -51,14 +53,21 @@ function PartForm({ addPart, editId, parts }) {
         ))}
       </select>
 
-      <input
+      <select
         className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
-        placeholder="የእቃው አይነት"
         value={form.name}
         onChange={(e) =>
           setForm({ ...form, name: e.target.value })
         }
-      />
+        disabled={!form.category}
+      >
+        <option value="">የእቃው አይነት ይምረጡ</option>
+        {itemTypes.map((t) => (
+          <option key={t} value={t}>
+            {t}
+          </option>
+        ))}
+      </select>
 
       <input
         className="border p-2.5 sm:p-3 w-full rounded text-sm sm:text-base"
