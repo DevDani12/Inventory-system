@@ -107,7 +107,7 @@ function DataIO({ parts = [], onImport }) {
       xmlns:w="urn:schemas-microsoft-com:office:word"
       xmlns="http://www.w3.org/TR/REC-html40">
 <head><meta charset="UTF-8">
-<title>Spare Parts</title>
+<title>የተሽከርካሪ መለዋወጫ መመዝገቢያ</title>
 <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->
 <style>
 body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11pt; margin: 1in; }
@@ -119,7 +119,7 @@ td { border: 1px solid #ccc; padding: 5px 8px; }
 tr:nth-child(even) td { background: #f5f5f5; }
 </style>
 </head><body>
-<h1>Vehicle Spare Parts System</h1>
+<h1>የተሽከርካሪ መለዋወጫ መመዝገቢያ</h1>
 <p class="date">Printed: ${nowStr}</p>
 <table>
 <thead><tr>
