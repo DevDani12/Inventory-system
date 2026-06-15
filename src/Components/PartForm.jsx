@@ -1,35 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { categories, subCategories } from "../Data/categories";
 
-function PartForm({ addPart, editId, parts }) {
-  const [form, setForm] = useState({
-    category: "",
-    name: "",
-    quantity: "",
-    sender: "",
-  });
-
+function PartFormInner({ addPart, editId, initial }) {
+  const [form, setForm] = useState({ ...initial });
   const itemTypes = form.category ? subCategories[form.category] || [] : [];
-
-  useEffect(() => {
-    if (editId) {
-      const item = parts.find((p) => p.id === editId);
-      if (item) {
-        setForm({
-          category: item.category || "",
-          name: item.name || "",
-          quantity: item.quantity || "",
-          sender: item.sender || "",
-        });
-      }
-    } else {
-      setForm({ category: "", name: "", quantity: "", sender: "" });
-    }
-  }, [editId, parts]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPart({ id: editId || Date.now(), ...form });
+    addPart({
+      id: editId || Date.now(),
+      category: form.category,
+      name: form.name,
+      quantity: form.quantity,
+      sender: form.sender,
+      createdAt: editId ? undefined : Date.now(),
+    });
     setForm({ category: "", name: "", quantity: "", sender: "" });
   };
 
@@ -92,6 +77,21 @@ function PartForm({ addPart, editId, parts }) {
         {editId ? "Update Part" : "Save Part"}
       </button>
     </form>
+  );
+}
+
+function PartForm({ addPart, editId, parts }) {
+  const initial = editId
+    ? parts.find((p) => p.id === editId) || { category: "", name: "", quantity: "", sender: "" }
+    : { category: "", name: "", quantity: "", sender: "" };
+
+  return (
+    <PartFormInner
+      key={editId || "new"}
+      addPart={addPart}
+      editId={editId}
+      initial={initial}
+    />
   );
 }
 

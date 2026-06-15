@@ -34,12 +34,6 @@ function getTimeStr(d) {
   return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
 }
 
-function serialToDate(serial) {
-  const utcDays = Math.floor(serial - 25569);
-  const utcValue = utcDays * 86400;
-  return new Date(utcValue * 1000);
-}
-
 function DataIO({ parts = [], onImport }) {
   const fileRef = useRef(null);
   const date = new Date().toISOString().split("T")[0];
