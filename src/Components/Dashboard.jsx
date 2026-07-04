@@ -64,9 +64,12 @@ function Dashboard({ parts }) {
           <h3 className="font-bold text-sm sm:text-base mb-2">Recent Additions</h3>
           <div className="space-y-1">
             {recent.map((p) => (
-              <div key={p.id} className="text-xs sm:text-sm flex justify-between border-b last:border-0 pb-1">
-                <span className="truncate">{p.name}</span>
-                <span className="text-gray-400 shrink-0 ml-2">x{p.quantity}</span>
+              <div key={p.id} className="border-b last:border-0 pb-1">
+                <div className="text-xs sm:text-sm flex justify-between">
+                  <span className="truncate">{p.name}</span>
+                  <span className="text-gray-400 shrink-0 ml-2">x{p.quantity}</span>
+                </div>
+                {p.sender && <p className="text-[10px] sm:text-xs text-gray-400 truncate">{p.sender}</p>}
               </div>
             ))}
           </div>

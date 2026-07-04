@@ -14,6 +14,7 @@ function Header({ profile, onProfileClick }) {
       <div className="max-w-2xl mx-auto flex items-center justify-between">
         <div>
           <h1 className="text-base sm:text-xl md:text-2xl font-bold leading-tight">የተሽከርካሪ መለዋወጫ መመዝገቢያ</h1>
+          <p className="text-[10px] sm:text-sm leading-tight opacity-90">ዳንኤል አድማሱ የቦዲ ስራ አለም አቀፍ ተቋም</p>
           <p className="text-[10px] sm:text-sm mt-0.5 opacity-90">{formatEthiopianWithTime(now)}</p>
         </div>
         <button
